@@ -9,7 +9,7 @@
  * Jest cannot handle these without painful transform configs.
  */
 
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { sanitiseInput, extractKeywords, SYSTEM_PROMPT, MAX_INPUT_LENGTH } from "../src/lib/gemini";
 
 // ── 1. Input sanitisation — length enforcement ─────────────────────────────

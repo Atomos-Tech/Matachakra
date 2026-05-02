@@ -20,7 +20,6 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Send, Sparkles, Bot, User, Mic, MicOff, AlertCircle, Database, Cpu } from "lucide-react";
 import { sendChatMessage } from "@/actions/chat";
-import { PollingBoothLocator } from "./PollingBoothLocator";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -131,10 +130,6 @@ function MessageBubble({ m }: { m: Message }) {
           )}
         </div>
         {!isUser && <SourceBadge source={m.source} />}
-        {!isUser &&
-          (m.content.toLowerCase().includes("where") ||
-            m.content.toLowerCase().includes("booth") ||
-            m.content.toLowerCase().includes("station")) && <PollingBoothLocator />}
       </div>
     </motion.div>
   );

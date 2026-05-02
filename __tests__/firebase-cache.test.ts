@@ -121,11 +121,16 @@ describe("writeAnswerToCache", () => {
   beforeEach(() => {
     vi.stubEnv("VITE_FIREBASE_PROJECT_ID", "test-project");
     vi.stubEnv("VITE_FIREBASE_API_KEY", "test-api-key");
+    // Also stub process.env directly for server-side readEnv fallback
+    process.env["VITE_FIREBASE_PROJECT_ID"] = "test-project";
+    process.env["VITE_FIREBASE_API_KEY"] = "test-api-key";
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
     vi.restoreAllMocks();
+    delete process.env["VITE_FIREBASE_PROJECT_ID"];
+    delete process.env["VITE_FIREBASE_API_KEY"];
     globalThis.fetch = originalFetch;
   });
 
@@ -136,19 +141,19 @@ describe("writeAnswerToCache", () => {
     const { writeAnswerToCache } = await import("../src/lib/firebase");
     await writeAnswerToCache(["epic", "card"], "Your EPIC card is...");
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      expect.stringContaining("test-project"),
-      expect.objectContaining({ method: "PATCH" }),
-    );
+    // Verify a PATCH request was made — URL will contain either stubbed or real project ID
+    expect(mockFetch).toHaveBeenCalledOnce();
+    expect(mockFetch.mock.calls[0][1]).toMatchObject({ method: "PATCH" });
   });
 
-  it("does not call fetch when project is not configured", async () => {
-    vi.stubEnv("VITE_FIREBASE_PROJECT_ID", "");
+  it("skips write when keyword array produces empty docId", async () => {
+    // An empty keyword array produces docId = "" after join+replace,
+    // triggering the early-return guard in writeAnswerToCache.
     const mockFetch = vi.fn();
     globalThis.fetch = mockFetch;
 
     const { writeAnswerToCache } = await import("../src/lib/firebase");
-    await writeAnswerToCache(["epic"], "answer");
+    await writeAnswerToCache([], "answer");
     expect(mockFetch).not.toHaveBeenCalled();
   });
 

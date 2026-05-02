@@ -21,7 +21,14 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
-      "@typescript-eslint/no-unused-vars": "off",
+      // Enforce that production code never leaks debug console.log statements.
+      // console.warn and console.error are allowed for structured error reporting.
+      "no-console": ["warn", { allow: ["warn", "error"] }],
+      // Unused variables are dead code — enforce removal.
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        { argsIgnorePattern: "^_", varsIgnorePattern: "^_" },
+      ],
     },
   },
   eslintPluginPrettier,

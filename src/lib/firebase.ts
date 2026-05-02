@@ -24,13 +24,17 @@
 
 // ── Env helpers (lazy — evaluated at call time, not module load time) ─────────
 
+/** Shape of Vite's import.meta.env object (subset we use). */
+interface ViteImportMeta {
+  env: Record<string, string | undefined>;
+}
+
 /** Read an env var from import.meta.env (Vite) or process.env (Node.js). */
 function readEnv(key: string): string {
   // import.meta.env is a Vite build-time object (replaced at bundle time).
   // In Node.js production, we fall back to process.env.
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const viteVal = (import.meta.env as any)?.[key];
+    const viteVal = (import.meta as unknown as ViteImportMeta).env?.[key];
     if (viteVal) return viteVal;
   } catch {
     // import.meta not available in some test runners
