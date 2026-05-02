@@ -26,7 +26,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-muted-foreground backdrop-blur"
+          className="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs font-medium text-slate-300 backdrop-blur"
         >
           <Sparkles className="h-3.5 w-3.5 text-primary" aria-hidden />
           <span>Your civic AI co-pilot — built for every voter</span>
@@ -57,7 +57,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl"
+          className="mx-auto mt-6 max-w-2xl text-lg text-slate-300 md:text-xl"
         >
           From registration to results — explore the timeline, get answers from our
           AI assistant, and walk into the polling booth with confidence.

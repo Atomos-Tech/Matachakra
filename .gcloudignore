@@ -1,0 +1,27 @@
+# Ignore standard git files
+.git/
+.gitignore
+
+# Ignore dependencies
+node_modules/
+
+# Ignore build outputs
+dist/
+dist-ssr/
+.output/
+.vinxi/
+.tanstack/
+.nitro/
+
+# Ignore secrets
+*.local
+.env.local
+
+# Editor files
+.vscode/
+.idea/
+.DS_Store
+
+# Ignore test artifacts
+coverage/
+__tests__/
