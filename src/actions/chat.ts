@@ -26,6 +26,10 @@ import { z } from "zod";
 import { getAnswerFromCache, writeAnswerToCache } from "@/lib/firebase";
 import { askGemini, sanitiseInput } from "@/lib/gemini";
 
+export const getMapsApiKey = createServerFn({ method: "GET" }).handler(() => {
+  return process.env.VITE_GOOGLE_MAPS_API_KEY || "";
+});
+
 // ── Input schema (Zod) ────────────────────────────────────────────────────────
 
 const ChatRequestSchema = z.object({

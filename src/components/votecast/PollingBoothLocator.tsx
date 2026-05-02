@@ -1,14 +1,26 @@
+import { useEffect, useState } from "react";
 import { MapPin } from "lucide-react";
+import { getMapsApiKey } from "@/actions/chat";
 
 interface PollingBoothLocatorProps {
   location?: string;
 }
 
 export function PollingBoothLocator({ location = "New Delhi, India" }: PollingBoothLocatorProps) {
-  const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+  const [apiKey, setApiKey] = useState<string | null>(null);
+
+  useEffect(() => {
+    getMapsApiKey().then((key) => {
+      if (key) setApiKey(key);
+    });
+  }, []);
 
   if (!apiKey) {
-    return null;
+    return (
+      <div className="mt-4 flex h-64 w-full items-center justify-center rounded-xl border border-white/10 bg-white/5 p-4 text-sm text-muted-foreground shadow-sm">
+        <span className="animate-pulse">Loading Map...</span>
+      </div>
+    );
   }
 
   // Use a generic query if none provided, but ideally we'd search for polling stations
