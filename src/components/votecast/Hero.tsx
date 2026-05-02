@@ -39,8 +39,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="mt-6 font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl"
         >
-          The election process,{" "}
-          <span className="text-gradient-cyan">finally</span>{" "}
+          The election process, <span className="text-gradient-cyan">finally</span>{" "}
           <span className="relative inline-block">
             simple.
             <motion.span
@@ -59,8 +58,8 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-slate-300 md:text-xl"
         >
-          From registration to results — explore the timeline, get answers from our
-          AI assistant, and walk into the polling booth with confidence.
+          From registration to results — explore the timeline, get answers from our AI assistant,
+          and walk into the polling booth with confidence.
         </motion.p>
 
         <motion.div
@@ -75,7 +74,10 @@ export function Hero() {
             aria-label="Explore the election timeline"
           >
             Explore the timeline
-            <ArrowDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" aria-hidden />
+            <ArrowDown
+              className="h-4 w-4 transition-transform group-hover:translate-y-0.5"
+              aria-hidden
+            />
           </a>
           <a
             href="#assistant"

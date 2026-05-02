@@ -11,11 +11,7 @@ export function Quiz() {
   const reset = () => setSelected(null);
 
   return (
-    <section
-      id="quiz"
-      className="relative px-6 py-20"
-      aria-labelledby="quiz-title"
-    >
+    <section id="quiz" className="relative px-6 py-20" aria-labelledby="quiz-title">
       <div className="mx-auto max-w-3xl">
         <div className="mb-10 text-center">
           <p className="mb-3 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-coral">
@@ -48,7 +44,11 @@ export function Quiz() {
               What is the minimum age to register to vote in India?
             </h3>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-3" role="radiogroup" aria-label="Answer options">
+            <div
+              className="mt-8 grid gap-3 sm:grid-cols-3"
+              role="radiogroup"
+              aria-label="Answer options"
+            >
               {OPTIONS.map((opt) => {
                 const isSelected = selected === opt;
                 const isCorrect = opt === CORRECT;
@@ -56,10 +56,10 @@ export function Quiz() {
                 const stateClasses = !showState
                   ? "border-white/10 bg-white/5 text-foreground hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/10"
                   : isCorrect
-                  ? "border-emerald-400/60 bg-emerald-400/10 text-emerald-300"
-                  : isSelected
-                  ? "border-coral/60 bg-coral/10 text-coral"
-                  : "border-white/5 bg-white/[0.02] text-muted-foreground/60";
+                    ? "border-emerald-400/60 bg-emerald-400/10 text-emerald-300"
+                    : isSelected
+                      ? "border-coral/60 bg-coral/10 text-coral"
+                      : "border-white/5 bg-white/[0.02] text-muted-foreground/60";
 
                 return (
                   <button
@@ -90,9 +90,16 @@ export function Quiz() {
                 >
                   <p className="text-sm text-foreground/90">
                     {selected === CORRECT ? (
-                      <>✅ <strong className="font-semibold">Correct!</strong> You must be 18+ on the qualifying date (Jan 1) to register.</>
+                      <>
+                        ✅ <strong className="font-semibold">Correct!</strong> You must be 18+ on
+                        the qualifying date (Jan 1) to register.
+                      </>
                     ) : (
-                      <>❌ Not quite. The correct answer is <strong className="font-semibold text-emerald-300">18</strong> — the minimum voting age in India.</>
+                      <>
+                        ❌ Not quite. The correct answer is{" "}
+                        <strong className="font-semibold text-emerald-300">18</strong> — the minimum
+                        voting age in India.
+                      </>
                     )}
                   </p>
                   <button

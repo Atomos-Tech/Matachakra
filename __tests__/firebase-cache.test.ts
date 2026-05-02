@@ -103,9 +103,7 @@ describe("Firebase cache — getAnswerFromCache", () => {
 
     const { getAnswerFromCache } = await import("../src/lib/firebase");
     // Must not throw — graceful degradation to Gemini
-    await expect(
-      getAnswerFromCache("What is registration?"),
-    ).resolves.toEqual({ hit: false });
+    await expect(getAnswerFromCache("What is registration?")).resolves.toEqual({ hit: false });
   });
 
   it("returns cache MISS when Firebase is not configured", async () => {
@@ -158,9 +156,7 @@ describe("writeAnswerToCache", () => {
     globalThis.fetch = vi.fn().mockRejectedValue(new Error("timeout"));
 
     const { writeAnswerToCache } = await import("../src/lib/firebase");
-    await expect(
-      writeAnswerToCache(["epic"], "answer"),
-    ).resolves.toBeUndefined();
+    await expect(writeAnswerToCache(["epic"], "answer")).resolves.toBeUndefined();
   });
 
   it("skips write for empty keyword array", async () => {

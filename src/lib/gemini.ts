@@ -80,7 +80,9 @@ export type GeminiResult = GeminiSuccess | GeminiError;
  * Sanitises raw user input before it reaches the model.
  * Returns a sanitised string, or throws with an HTTP-semantics error.
  */
-export function sanitiseInput(raw: string): { ok: true; value: string } | { ok: false; status: number; error: string } {
+export function sanitiseInput(
+  raw: string,
+): { ok: true; value: string } | { ok: false; status: number; error: string } {
   const trimmed = raw.trim();
 
   if (!trimmed) {
@@ -100,7 +102,8 @@ export function sanitiseInput(raw: string): { ok: true; value: string } | { ok: 
       return {
         ok: false,
         status: 400,
-        error: "Your message contains content that cannot be processed. Please rephrase your question.",
+        error:
+          "Your message contains content that cannot be processed. Please rephrase your question.",
       };
     }
   }
@@ -115,11 +118,58 @@ export function sanitiseInput(raw: string): { ok: true; value: string } | { ok: 
  * Very lightweight — no NLP library required.
  */
 const STOP_WORDS = new Set([
-  "the", "is", "in", "at", "on", "and", "or", "but", "for", "to", "of", "a",
-  "an", "my", "me", "how", "what", "when", "where", "who", "why", "which",
-  "can", "do", "does", "did", "will", "would", "should", "could", "have",
-  "has", "had", "are", "was", "were", "be", "been", "being", "get", "got",
-  "if", "so", "i", "you", "we", "they", "it", "this", "that", "with", "not",
+  "the",
+  "is",
+  "in",
+  "at",
+  "on",
+  "and",
+  "or",
+  "but",
+  "for",
+  "to",
+  "of",
+  "a",
+  "an",
+  "my",
+  "me",
+  "how",
+  "what",
+  "when",
+  "where",
+  "who",
+  "why",
+  "which",
+  "can",
+  "do",
+  "does",
+  "did",
+  "will",
+  "would",
+  "should",
+  "could",
+  "have",
+  "has",
+  "had",
+  "are",
+  "was",
+  "were",
+  "be",
+  "been",
+  "being",
+  "get",
+  "got",
+  "if",
+  "so",
+  "i",
+  "you",
+  "we",
+  "they",
+  "it",
+  "this",
+  "that",
+  "with",
+  "not",
 ]);
 
 export function extractKeywords(text: string): string[] {
@@ -139,7 +189,9 @@ function getClient(): GoogleGenAI {
   if (!_client) {
     const apiKey =
       // TanStack Start server-side: process.env (Node) or import.meta.env (Vite)
-      process.env.GEMINI_API_KEY ?? (import.meta as unknown as { env: Record<string, string> }).env.GEMINI_API_KEY ?? "";
+      process.env.GEMINI_API_KEY ??
+      (import.meta as unknown as { env: Record<string, string> }).env.GEMINI_API_KEY ??
+      "";
 
     if (!apiKey) {
       throw new Error("GEMINI_API_KEY is not configured.");
@@ -176,9 +228,9 @@ export async function askGemini(input: ChatInput): Promise<GeminiResult> {
       contents,
       config: {
         systemInstruction: SYSTEM_PROMPT,
-        temperature: 0.4,        // Lower temp → more factual, less creative hallucination
+        temperature: 0.4, // Lower temp → more factual, less creative hallucination
         topP: 0.8,
-        maxOutputTokens: 1024,   // Enforces the ≤3 paragraph constraint at the token level
+        maxOutputTokens: 1024, // Enforces the ≤3 paragraph constraint at the token level
       },
     });
 

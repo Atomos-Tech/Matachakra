@@ -24,9 +24,21 @@ export function Navbar() {
           </a>
 
           <ul className="hidden items-center gap-8 text-sm text-muted-foreground md:flex">
-            <li><a href="#timeline" className="transition-colors hover:text-foreground">Timeline</a></li>
-            <li><a href="#assistant" className="transition-colors hover:text-foreground">Assistant</a></li>
-            <li><a href="#resources" className="transition-colors hover:text-foreground">Resources</a></li>
+            <li>
+              <a href="#timeline" className="transition-colors hover:text-foreground">
+                Timeline
+              </a>
+            </li>
+            <li>
+              <a href="#assistant" className="transition-colors hover:text-foreground">
+                Assistant
+              </a>
+            </li>
+            <li>
+              <a href="#resources" className="transition-colors hover:text-foreground">
+                Resources
+              </a>
+            </li>
           </ul>
 
           <a

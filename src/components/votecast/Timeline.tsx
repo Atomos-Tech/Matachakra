@@ -68,11 +68,7 @@ export function Timeline() {
   const active = STEPS.find((s) => s.id === activeId)!;
 
   return (
-    <section
-      id="timeline"
-      className="relative px-6 py-20"
-      aria-labelledby="timeline-title"
-    >
+    <section id="timeline" className="relative px-6 py-20" aria-labelledby="timeline-title">
       <div className="mx-auto max-w-7xl">
         <StateSelect />
         <div className="mb-12 text-center">
@@ -126,8 +122,8 @@ export function Timeline() {
                         isActive
                           ? "border-primary bg-gradient-to-br from-primary to-cyan-glow text-primary-foreground glow-primary"
                           : isPast
-                          ? "border-primary/40 bg-primary/10 text-primary"
-                          : "border-white/10 bg-white/5 text-muted-foreground group-hover:border-white/25 group-hover:text-foreground"
+                            ? "border-primary/40 bg-primary/10 text-primary"
+                            : "border-white/10 bg-white/5 text-muted-foreground group-hover:border-white/25 group-hover:text-foreground"
                       }`}
                     >
                       {isPast ? (
@@ -140,9 +136,11 @@ export function Timeline() {
                       </span>
                     </motion.div>
                     <div className="mt-4 text-center">
-                      <p className={`font-display text-sm font-semibold transition-colors ${
-                        isActive ? "text-foreground" : "text-muted-foreground"
-                      }`}>
+                      <p
+                        className={`font-display text-sm font-semibold transition-colors ${
+                          isActive ? "text-foreground" : "text-muted-foreground"
+                        }`}
+                      >
                         {step.label}
                       </p>
                       <p className="mt-1 text-xs text-muted-foreground/70">{step.short}</p>

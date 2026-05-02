@@ -35,7 +35,8 @@ export function PollingBoothLocator({ location = "New Delhi, India" }: PollingBo
         />
       </div>
       <p className="mt-2 text-xs text-muted-foreground">
-        Showing approximate locations based on your area. Always verify your exact booth on the official ECI portal.
+        Showing approximate locations based on your area. Always verify your exact booth on the
+        official ECI portal.
       </p>
     </div>
   );

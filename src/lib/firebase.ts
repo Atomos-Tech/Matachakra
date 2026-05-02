@@ -172,8 +172,7 @@ export async function getAnswerFromCache(query: string): Promise<CacheResult | C
     let bestDoc: FirestoreDocument | null = null;
 
     for (const doc of docs) {
-      const keywords =
-        doc.fields.keywords?.arrayValue?.values?.map((v) => v.stringValue) ?? [];
+      const keywords = doc.fields.keywords?.arrayValue?.values?.map((v) => v.stringValue) ?? [];
       const score = scoreMatch(keywords, queryTokens);
       if (score > bestScore) {
         bestScore = score;

@@ -140,9 +140,10 @@ function MessageBubble({ m }: { m: Message }) {
           )}
         </div>
         {!isUser && <SourceBadge source={m.source} />}
-        {!isUser && (m.content.toLowerCase().includes("where") || m.content.toLowerCase().includes("booth") || m.content.toLowerCase().includes("station")) && (
-          <PollingBoothLocator />
-        )}
+        {!isUser &&
+          (m.content.toLowerCase().includes("where") ||
+            m.content.toLowerCase().includes("booth") ||
+            m.content.toLowerCase().includes("station")) && <PollingBoothLocator />}
       </div>
     </motion.div>
   );
@@ -177,9 +178,10 @@ export function Assistant() {
 
   // ── Detect voice support ─────────────────────────────────────────────────
   useEffect(() => {
-    const SR = typeof window !== "undefined"
-      ? window.SpeechRecognition ?? window.webkitSpeechRecognition
-      : null;
+    const SR =
+      typeof window !== "undefined"
+        ? (window.SpeechRecognition ?? window.webkitSpeechRecognition)
+        : null;
     setVoiceSupported(!!SR);
   }, []);
 
@@ -367,7 +369,10 @@ export function Assistant() {
                   className="flex items-end gap-2.5"
                   aria-label="Assistant is generating a response"
                 >
-                  <div className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-primary to-cyan-glow text-primary-foreground" aria-hidden>
+                  <div
+                    className="grid h-8 w-8 place-items-center rounded-full bg-gradient-to-br from-primary to-cyan-glow text-primary-foreground"
+                    aria-hidden
+                  >
                     <Bot className="h-4 w-4" />
                   </div>
                   <div className="rounded-2xl rounded-bl-sm bg-white/[0.06] px-4 py-3 ring-1 ring-white/10">
@@ -389,7 +394,11 @@ export function Assistant() {
 
           {/* Quick prompts */}
           <div className="border-t border-white/10 px-4 pt-4 sm:px-6">
-            <div className="flex flex-wrap gap-2" role="group" aria-label="Quick prompt suggestions">
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Quick prompt suggestions"
+            >
               {QUICK_PROMPTS.map((q) => (
                 <button
                   key={q}
@@ -422,9 +431,7 @@ export function Assistant() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={
-                  isListening
-                    ? "Listening… speak now"
-                    : "Ask about registration, voting, IDs…"
+                  isListening ? "Listening… speak now" : "Ask about registration, voting, IDs…"
                 }
                 disabled={isLoading}
                 maxLength={500}

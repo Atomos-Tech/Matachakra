@@ -23,20 +23,20 @@ const fetchHandler = app.fetch;
 
 // ── Static asset MIME types ───────────────────────────────────────────────────
 const MIME = {
-  ".js":   "application/javascript; charset=utf-8",
-  ".mjs":  "application/javascript; charset=utf-8",
-  ".css":  "text/css; charset=utf-8",
+  ".js": "application/javascript; charset=utf-8",
+  ".mjs": "application/javascript; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
   ".html": "text/html; charset=utf-8",
   ".json": "application/json; charset=utf-8",
-  ".ico":  "image/x-icon",
-  ".png":  "image/png",
-  ".svg":  "image/svg+xml",
-  ".woff2":"font/woff2",
+  ".ico": "image/x-icon",
+  ".png": "image/png",
+  ".svg": "image/svg+xml",
+  ".woff2": "font/woff2",
   ".woff": "font/woff",
-  ".ttf":  "font/ttf",
+  ".ttf": "font/ttf",
   ".webp": "image/webp",
   ".avif": "image/avif",
-  ".txt":  "text/plain; charset=utf-8",
+  ".txt": "text/plain; charset=utf-8",
 };
 
 // ── Node http server ──────────────────────────────────────────────────────────
@@ -59,9 +59,7 @@ const server = http.createServer(async (req, res) => {
       const isHashed = /\.[0-9a-f]{8,}\./.test(url.pathname);
       res.writeHead(200, {
         "Content-Type": mime,
-        "Cache-Control": isHashed
-          ? "public, max-age=31536000, immutable"
-          : "public, max-age=3600",
+        "Cache-Control": isHashed ? "public, max-age=31536000, immutable" : "public, max-age=3600",
       });
       res.end(file);
       return;

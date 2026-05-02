@@ -10,12 +10,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import {
-  sanitiseInput,
-  extractKeywords,
-  SYSTEM_PROMPT,
-  MAX_INPUT_LENGTH,
-} from "../src/lib/gemini";
+import { sanitiseInput, extractKeywords, SYSTEM_PROMPT, MAX_INPUT_LENGTH } from "../src/lib/gemini";
 
 // ── 1. Input sanitisation — length enforcement ─────────────────────────────
 
@@ -55,9 +50,7 @@ describe("sanitiseInput — length enforcement", () => {
   });
 
   it("returns ok:true for a multi-word election question", () => {
-    const result = sanitiseInput(
-      "How do I check if my name is on the electoral roll?",
-    );
+    const result = sanitiseInput("How do I check if my name is on the electoral roll?");
     expect(result.ok).toBe(true);
   });
 });
@@ -154,9 +147,7 @@ describe("extractKeywords", () => {
   });
 
   it("extracts meaningful election terms", () => {
-    const keywords = extractKeywords(
-      "How do I register to vote and get my EPIC card?",
-    );
+    const keywords = extractKeywords("How do I register to vote and get my EPIC card?");
     expect(keywords).toContain("register");
     expect(keywords).toContain("vote");
     expect(keywords).toContain("epic");

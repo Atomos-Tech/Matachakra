@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  ShieldCheck,
-  EyeOff,
-  Accessibility,
-  FileText,
-  CreditCard,
-  Home,
-} from "lucide-react";
+import { ShieldCheck, EyeOff, Accessibility, FileText, CreditCard, Home } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 type Resource = {
@@ -57,11 +50,7 @@ const RESOURCES: Resource[] = [
 
 export function ResourceGrid() {
   return (
-    <section
-      id="resources"
-      className="relative px-6 py-20"
-      aria-labelledby="resources-title"
-    >
+    <section id="resources" className="relative px-6 py-20" aria-labelledby="resources-title">
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -90,9 +79,7 @@ export function ResourceGrid() {
                 viewport={{ once: true, margin: "-40px" }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
               >
-                <article
-                  className="glass group relative flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]"
-                >
+                <article className="glass group relative flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-[var(--shadow-elevated)]">
                   <div className="mb-5 flex items-center justify-between">
                     <div
                       className={`grid h-12 w-12 place-items-center rounded-xl ${
@@ -105,20 +92,14 @@ export function ResourceGrid() {
                     </div>
                     <span
                       className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider ${
-                        isRight
-                          ? "bg-primary/10 text-primary"
-                          : "bg-coral/10 text-coral"
+                        isRight ? "bg-primary/10 text-primary" : "bg-coral/10 text-coral"
                       }`}
                     >
                       {r.tag}
                     </span>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground">
-                    {r.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {r.body}
-                  </p>
+                  <h3 className="font-display text-lg font-semibold text-foreground">{r.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{r.body}</p>
                 </article>
               </motion.li>
             );
