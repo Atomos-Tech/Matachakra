@@ -36,15 +36,6 @@ type Message = {
 // Mirrors the server function's history type
 type ConversationTurn = { role: "user" | "model"; text: string };
 
-// ── Browser Speech Recognition types (not in standard TS lib) ────────────────
-
-declare global {
-  interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
-  }
-}
-
 // ── Constants ─────────────────────────────────────────────────────────────────
 
 const QUICK_PROMPTS = [
@@ -281,7 +272,7 @@ export function Assistant() {
 
     recognition.onresult = (event: SpeechRecognitionEvent) => {
       const transcript = Array.from(event.results)
-        .map((r) => r[0].transcript)
+        .map((r: SpeechRecognitionResult) => r[0].transcript)
         .join("");
       setInput(transcript);
     };

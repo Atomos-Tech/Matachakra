@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, EyeOff, Accessibility, FileText, CreditCard, Home } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { PollingBoothLocator } from "./PollingBoothLocator";
 
 type Resource = {
   icon: LucideIcon;
@@ -105,6 +106,40 @@ export function ResourceGrid() {
             );
           })}
         </ul>
+
+        {/* ── Google Maps Integration — Find Your Polling Booth ─────────────────── */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-16"
+          aria-labelledby="maps-section-title"
+        >
+          <div className="mb-6 text-center">
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-primary">
+              Powered by Google Maps
+            </p>
+            <h2 id="maps-section-title" className="font-display text-3xl font-bold md:text-4xl">
+              Find your <span className="text-gradient-cyan">Polling Booth</span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
+              Use the interactive map below to locate polling stations near you. Always verify your
+              exact booth number on the official ECI portal at{" "}
+              <a
+                href="https://electoralsearch.eci.gov.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary underline underline-offset-4 hover:text-primary/80"
+                aria-label="Open ECI electoral search portal in a new tab"
+              >
+                electoralsearch.eci.gov.in
+              </a>
+              .
+            </p>
+          </div>
+          <PollingBoothLocator />
+        </motion.div>
       </div>
     </section>
   );
