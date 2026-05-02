@@ -1,0 +1,206 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-coral: var(--coral);
+  --color-coral-foreground: var(--coral-foreground);
+  --color-cyan-glow: var(--cyan-glow);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-mid: var(--navy-mid);
+
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --shadow-glow: 0 0 60px -10px var(--primary);
+  --shadow-coral-glow: 0 0 50px -10px var(--coral);
+  --shadow-elevated: 0 20px 60px -20px oklch(0.15 0.08 250 / 0.5);
+  --shadow-glass: 0 8px 32px 0 oklch(0.1 0.05 250 / 0.4);
+
+  --gradient-hero: radial-gradient(ellipse at top, oklch(0.35 0.15 250 / 0.4), transparent 60%),
+                   linear-gradient(180deg, var(--background), var(--navy-deep));
+  --gradient-primary: linear-gradient(135deg, var(--primary), var(--cyan-glow));
+  --gradient-coral: linear-gradient(135deg, var(--coral), oklch(0.75 0.18 25));
+  --gradient-text: linear-gradient(135deg, oklch(0.98 0 0), var(--cyan-glow));
+}
+
+:root {
+  --radius: 0.875rem;
+
+  /* Deep navy base — premium dark theme by default */
+  --background: oklch(0.14 0.04 255);
+  --foreground: oklch(0.98 0.005 240);
+
+  --navy-deep: oklch(0.10 0.04 258);
+  --navy-mid: oklch(0.20 0.05 255);
+
+  --card: oklch(0.20 0.04 255 / 0.6);
+  --card-foreground: oklch(0.98 0.005 240);
+
+  --popover: oklch(0.18 0.04 255);
+  --popover-foreground: oklch(0.98 0.005 240);
+
+  /* Electric cyan as primary accent */
+  --primary: oklch(0.78 0.16 215);
+  --primary-foreground: oklch(0.12 0.04 258);
+
+  --cyan-glow: oklch(0.85 0.18 200);
+
+  --secondary: oklch(0.25 0.05 255);
+  --secondary-foreground: oklch(0.98 0.005 240);
+
+  --muted: oklch(0.22 0.04 255);
+  --muted-foreground: oklch(0.72 0.03 245);
+
+  --accent: oklch(0.30 0.08 255);
+  --accent-foreground: oklch(0.98 0.005 240);
+
+  /* Coral accent for emphasis */
+  --coral: oklch(0.72 0.20 30);
+  --coral-foreground: oklch(0.12 0.04 258);
+
+  --destructive: oklch(0.65 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 240);
+
+  --border: oklch(1 0 0 / 0.08);
+  --input: oklch(1 0 0 / 0.06);
+  --ring: oklch(0.78 0.16 215);
+
+  --chart-1: oklch(0.78 0.16 215);
+  --chart-2: oklch(0.72 0.20 30);
+  --chart-3: oklch(0.85 0.18 200);
+  --chart-4: oklch(0.65 0.18 280);
+  --chart-5: oklch(0.80 0.18 145);
+
+  --sidebar: oklch(0.18 0.04 255);
+  --sidebar-foreground: oklch(0.98 0.005 240);
+  --sidebar-primary: oklch(0.78 0.16 215);
+  --sidebar-primary-foreground: oklch(0.12 0.04 258);
+  --sidebar-accent: oklch(0.25 0.05 255);
+  --sidebar-accent-foreground: oklch(0.98 0.005 240);
+  --sidebar-border: oklch(1 0 0 / 0.08);
+  --sidebar-ring: oklch(0.78 0.16 215);
+}
+
+.dark {
+  --background: oklch(0.14 0.04 255);
+  --foreground: oklch(0.98 0.005 240);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* Focus-visible — strong, accessible */
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: linear-gradient(135deg,
+      oklch(1 0 0 / 0.06),
+      oklch(1 0 0 / 0.02));
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid oklch(1 0 0 / 0.10);
+  }
+
+  .glass-strong {
+    background: linear-gradient(135deg,
+      oklch(0.25 0.05 255 / 0.7),
+      oklch(0.18 0.04 255 / 0.5));
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid oklch(1 0 0 / 0.12);
+  }
+
+  .text-gradient {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-cyan {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(oklch(1 0 0 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(1 0 0 / 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .glow-coral {
+    box-shadow: var(--shadow-coral-glow);
+  }
+
+  /* Scrollbar */
+  .pretty-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+  .pretty-scroll::-webkit-scrollbar-track { background: transparent; }
+  .pretty-scroll::-webkit-scrollbar-thumb {
+    background: oklch(1 0 0 / 0.12);
+    border-radius: 999px;
+  }
+  .pretty-scroll::-webkit-scrollbar-thumb:hover {
+    background: oklch(1 0 0 / 0.2);
+  }
+}
