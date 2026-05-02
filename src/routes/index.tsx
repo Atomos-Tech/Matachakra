@@ -31,7 +31,7 @@ function Index() {
   return (
     <div className="dark min-h-screen bg-background text-foreground">
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
         <Timeline />
         <Assistant />

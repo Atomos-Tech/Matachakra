@@ -183,6 +183,11 @@ export function extractKeywords(text: string): string[] {
 
 // ── Gemini client ─────────────────────────────────────────────────────────────
 
+/** Shape of Vite's import.meta.env object (subset we use). */
+interface ViteImportMeta {
+  env: Record<string, string | undefined>;
+}
+
 let _client: GoogleGenAI | null = null;
 
 function getClient(): GoogleGenAI {
@@ -190,7 +195,7 @@ function getClient(): GoogleGenAI {
     const apiKey =
       // TanStack Start server-side: process.env (Node) or import.meta.env (Vite)
       process.env.GEMINI_API_KEY ??
-      (import.meta as unknown as { env: Record<string, string> }).env.GEMINI_API_KEY ??
+      (import.meta as unknown as ViteImportMeta).env.GEMINI_API_KEY ??
       "";
 
     if (!apiKey) {

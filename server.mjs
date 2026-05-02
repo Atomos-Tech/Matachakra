@@ -44,6 +44,16 @@ const PORT = parseInt(process.env.PORT ?? "8080", 10);
 const HOST = "0.0.0.0";
 const clientRoot = path.join(__dirname, "dist", "client");
 
+// ── Security headers (applied to every response) ─────────────────────────────
+const SECURITY_HEADERS = {
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Permissions-Policy": "camera=(), microphone=(self), geolocation=()",
+  "Strict-Transport-Security": "max-age=63072000; includeSubDomains; preload",
+  "X-DNS-Prefetch-Control": "off",
+};
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url ?? "/", `http://${req.headers.host ?? "localhost"}`);
 
@@ -58,6 +68,7 @@ const server = http.createServer(async (req, res) => {
       // Immutable cache for hashed assets, short-lived for others
       const isHashed = /\.[0-9a-f]{8,}\./.test(url.pathname);
       res.writeHead(200, {
+        ...SECURITY_HEADERS,
         "Content-Type": mime,
         "Cache-Control": isHashed ? "public, max-age=31536000, immutable" : "public, max-age=3600",
       });
@@ -93,8 +104,9 @@ const server = http.createServer(async (req, res) => {
 
     const response = await fetchHandler(webRequest);
 
-    // Stream the response back
-    res.writeHead(response.status, Object.fromEntries(response.headers.entries()));
+    // Stream the response back with security headers
+    const responseHeaders = Object.fromEntries(response.headers.entries());
+    res.writeHead(response.status, { ...SECURITY_HEADERS, ...responseHeaders });
     if (response.body) {
       const reader = response.body.getReader();
       while (true) {
